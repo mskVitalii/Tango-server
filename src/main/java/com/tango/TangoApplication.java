@@ -98,8 +98,8 @@ public class TangoApplication {
             Film film1 = filmRepository.save(new Film(
                     "Satantango",
                     8.0,
-                    "https://www.kinopoisk.ru/film/56328/posters/",
-                    "https://www.kinopoisk.ru/film/56328/posters/",
+                    "https://avatars.mds.yandex.net/get-kinopoisk-image/1946459/0c32806d-9e09-4aac-a53a-8cb5ee6aa9f8/960x960",
+                    "https://avatars.mds.yandex.net/get-kinopoisk-image/1946459/0c32806d-9e09-4aac-a53a-8cb5ee6aa9f8/960x960",
                     "Действие фильма разворачивается на территории фермы, доживающей свои последние дни. " +
                             "Несколько ее жителей решают уйти, похитив деньги, вырученные всеми участниками коммуны перед ее закрытием. " +
                             "Однако их планы нарушают слухи о появлении красноречивого и харизматичного Иримиаша, " +
@@ -115,8 +115,8 @@ public class TangoApplication {
             Film film3 = filmRepository.save(new Film(
                     "Догвилль",
                     7.9,
-                    "https://www.kinopoisk.ru/film/7226/posters/",
-                    "https://www.kinopoisk.ru/film/7226/posters/",
+                    "https://avatars.mds.yandex.net/get-kinopoisk-image/1946459/157fa777-376a-40be-8c1d-336d34413902/960x960",
+                    "https://avatars.mds.yandex.net/get-kinopoisk-image/1946459/157fa777-376a-40be-8c1d-336d34413902/960x960",
                     "Юная Грейс, сбежав от банды гангстеров, " +
                             "находит спасение в маленьком городке Догвилль где-то в Скалистых горах. " +
                             "Местные жители – один прекраснее другого – готовы ее укрыть. " +
@@ -129,8 +129,8 @@ public class TangoApplication {
             filmRepository.save(new Film(
                     "Мандерлей",
                     7.1,
-                    "https://www.kinopoisk.ru/film/22597/posters/",
-                    "https://www.kinopoisk.ru/film/22597/posters/",
+                    "https://avatars.mds.yandex.net/get-kinopoisk-image/1773646/639d1108-7006-4a61-8307-bc56f9537418/800x800",
+                    "https://avatars.mds.yandex.net/get-kinopoisk-image/1773646/639d1108-7006-4a61-8307-bc56f9537418/800x800",
                     "Через два месяца после описанных в «Догвилле» событий Грейс оказывается на плантации в Алабаме, " +
                             "где рабочие не знают, что рабство было отменено 70 лет назад...",
                     "https://vimeo.com/547868060"));
@@ -138,16 +138,16 @@ public class TangoApplication {
             filmRepository.save(new Film(
                     "Рассекая волны",
                     7.9,
-                    "https://www.kinopoisk.ru/film/5264/posters/",
-                    "https://www.kinopoisk.ru/film/5264/posters/",
+                    "https://avatars.mds.yandex.net/get-kinopoisk-image/1600647/9d776b40-6bbb-481d-91c3-a03942f6b042/960x960",
+                    "https://avatars.mds.yandex.net/get-kinopoisk-image/1600647/9d776b40-6bbb-481d-91c3-a03942f6b042/960x960",
                     "Бог дает каждому что-то, чтобы он стал лучше. Молодая девушка Бесс из отдаленной общины на северо-западе Шотландии влюбилась в хорошего парня - Яна, работающего на буровой установке в море. Несмотря на противостояние родственников, они женятся. Бесс просит Бога, чтобы Ян всегда был рядом с ней, и Ян возвращается к ней искалеченным после несчастного случая на буровой. Что может сделать молодая женщина, чтобы ее любимый остался жив? На какую жертву может пойти?",
                     "https://vimeo.com/547868060"));
 
             filmRepository.save(new Film(
                     "Реконструкция",
                     7.5,
-                    "https://www.kinopoisk.ru/film/46979/posters/",
-                    "https://www.kinopoisk.ru/film/46979/posters/",
+                    "https://avatars.mds.yandex.net/get-kinopoisk-image/1900788/0abaa12f-01ff-46db-9653-efd31961fd33/960x960",
+                    "https://avatars.mds.yandex.net/get-kinopoisk-image/1900788/0abaa12f-01ff-46db-9653-efd31961fd33/960x960",
                     "Двое — мужчина и женщина — встречаются в Копенгагене, проводят вместе восхитительную ночь и затем отчаянно пытаются освободиться от рутины будней и рискуют всем ради возможности быть вместе...",
                     "https://vimeo.com/547868060"));
 
@@ -155,8 +155,8 @@ public class TangoApplication {
             var film = new Film(
                     "Меланхолия",
                     7.0,
-                    "https://www.kinopoisk.ru/film/484488/posters/",
-                    "https://www.kinopoisk.ru/film/484488/posters/",
+                    "https://avatars.mds.yandex.net/get-kinopoisk-image/1773646/52191db9-ffe5-4280-9e8a-3ec334b1dcc5/800x800",
+                    "https://avatars.mds.yandex.net/get-kinopoisk-image/1773646/52191db9-ffe5-4280-9e8a-3ec334b1dcc5/800x800",
                     "События фильма разворачиваются в дни, которые предшествуют катастрофе. " +
                             "Первая часть посвящена свадьбе Жюстин, которая быстро охладевает к торжеству, " +
                             "чем вызывает непонимание близких и гостей. " +
