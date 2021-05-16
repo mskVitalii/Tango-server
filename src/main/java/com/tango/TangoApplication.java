@@ -86,7 +86,6 @@ public class TangoApplication {
             genreRepository.save(new Genre("Drama"));
             genreRepository.save(new Genre("Comedy"));
             genreRepository.save(new Genre("Detective"));
-            genreRepository.save(new Genre("Hentai"));
 
             Genre SCI_FI = genreRepository.findByGenreName("SCI-FI").orElseThrow(() -> new RuntimeException("genre not found"));
             Genre Drama = genreRepository.findByGenreName("Drama").orElseThrow(() -> new RuntimeException("genre not found"));
@@ -97,13 +96,15 @@ public class TangoApplication {
 
             ////////////////////////////////// Сохраняем несколько фильмов
             Film film1 = filmRepository.save(new Film(
-                    "SCI_FI future",
-                    faker.number().randomDouble(1, 0, 10),
-                    faker.avatar().image(),
-                    faker.avatar().image(),
-                    "Some film",
+                    "Satantango",
+                    8.0,
+                    "https://www.kinopoisk.ru/film/56328/posters/",
+                    "https://www.kinopoisk.ru/film/56328/posters/",
+                    "Действие фильма разворачивается на территории фермы, доживающей свои последние дни. " +
+                            "Несколько ее жителей решают уйти, похитив деньги, вырученные всеми участниками коммуны перед ее закрытием. " +
+                            "Однако их планы нарушают слухи о появлении красноречивого и харизматичного Иримиаша, " +
+                            "пропавшего полтора года назад и считавшегося погибшим.",
                     "https://vimeo.com/547868060"));
-//            film1.addGenre(SCI_FI);
 
             filmGenreRepository.save(new FilmGenre(film1, SCI_FI));
             filmGenreRepository.save(new FilmGenre(film1, Comedy));
@@ -112,30 +113,58 @@ public class TangoApplication {
             filmRepository.save(film1);
 
             Film film3 = filmRepository.save(new Film(
-                    "SCI_FI Drama",
-                    faker.number().randomDouble(1, 0, 10),
-                    faker.avatar().image(),
-                    faker.avatar().image(),
-                    "Some film",
+                    "Догвилль",
+                    7.9,
+                    "https://www.kinopoisk.ru/film/7226/posters/",
+                    "https://www.kinopoisk.ru/film/7226/posters/",
+                    "Юная Грейс, сбежав от банды гангстеров, " +
+                            "находит спасение в маленьком городке Догвилль где-то в Скалистых горах. " +
+                            "Местные жители – один прекраснее другого – готовы ее укрыть. " +
+                            "А взамен им совсем ничего не надо, ну, разве что помочь по дому или присмотреть за детьми. " +
+                            "Но постепенно милый Догвилль превращается для девушки в тюрьму.",
                     "https://vimeo.com/547868060"));
 
             filmGenreRepository.save(new FilmGenre(film3, SCI_FI));
 
             filmRepository.save(new Film(
-                    "Gravity falls 3 season",
-                    faker.number().randomDouble(1, 0, 10),
-                    faker.avatar().image(),
-                    faker.avatar().image(),
-                    "Some film",
+                    "Мандерлей",
+                    7.1,
+                    "https://www.kinopoisk.ru/film/22597/posters/",
+                    "https://www.kinopoisk.ru/film/22597/posters/",
+                    "Через два месяца после описанных в «Догвилле» событий Грейс оказывается на плантации в Алабаме, " +
+                            "где рабочие не знают, что рабство было отменено 70 лет назад...",
+                    "https://vimeo.com/547868060"));
+
+            filmRepository.save(new Film(
+                    "Рассекая волны",
+                    7.9,
+                    "https://www.kinopoisk.ru/film/5264/posters/",
+                    "https://www.kinopoisk.ru/film/5264/posters/",
+                    "Бог дает каждому что-то, чтобы он стал лучше. Молодая девушка Бесс из отдаленной общины на северо-западе Шотландии влюбилась в хорошего парня - Яна, работающего на буровой установке в море. Несмотря на противостояние родственников, они женятся. Бесс просит Бога, чтобы Ян всегда был рядом с ней, и Ян возвращается к ней искалеченным после несчастного случая на буровой. Что может сделать молодая женщина, чтобы ее любимый остался жив? На какую жертву может пойти?",
+                    "https://vimeo.com/547868060"));
+
+            filmRepository.save(new Film(
+                    "Реконструкция",
+                    7.5,
+                    "https://www.kinopoisk.ru/film/46979/posters/",
+                    "https://www.kinopoisk.ru/film/46979/posters/",
+                    "Двое — мужчина и женщина — встречаются в Копенгагене, проводят вместе восхитительную ночь и затем отчаянно пытаются освободиться от рутины будней и рискуют всем ради возможности быть вместе...",
                     "https://vimeo.com/547868060"));
 
 
             var film = new Film(
-                    faker.name().title(),
-                    faker.number().randomDouble(1, 0, 10),
-                    faker.avatar().image(),
-                    faker.avatar().image(),
-                    faker.lorem().characters(20, 500),
+                    "Меланхолия",
+                    7.0,
+                    "https://www.kinopoisk.ru/film/484488/posters/",
+                    "https://www.kinopoisk.ru/film/484488/posters/",
+                    "События фильма разворачиваются в дни, которые предшествуют катастрофе. " +
+                            "Первая часть посвящена свадьбе Жюстин, которая быстро охладевает к торжеству, " +
+                            "чем вызывает непонимание близких и гостей. " +
+                            "Героиней второй части является Клэр, сестра Жюстин. " +
+                            "Вначале Клэр ухаживает за впавшей в клиническую депрессию Жюстин " +
+                            "и одновременно страшится сообщений о приближении таинственной планеты Меланхолия. " +
+                            "Постепенно, по мере приближения планеты, Жюстин и Клэр меняются ролями. " +
+                            "Теперь паникующая Клэр нуждается в заботе. В отчаянии она с сестрой и сыном готовится принять неизбежное.",
                     "https://vimeo.com/547868060");
 
             User user = new User(
@@ -173,26 +202,11 @@ public class TangoApplication {
             user1.addFavorite(film2);
             userRepository.save(user1);
             System.out.println(userRepository.findByUsername(user.getUsername()).orElseThrow(() -> new Exception("А теперь всё вдвойне хуже")));
-            var savedUser = userRepository
-                    .findByUsernameFetch(user.getUsername());
+            userRepository.findByUsernameFetch(user.getUsername());
 
             System.out.println(userRepository.findByUsernameFetch(user.getUsername()));
 
-            var savedFilm = filmRepository.getOne(film.getFilmId());
-
-            //            try {
-//                User savedUser = userRepository.findUserWithFavoriteFilms(user.getId()).get(0);
-//                savedUser.addFavorite(film);
-//                savedUser.getFavoriteFilms().add(film);
-//                userRepository.save(savedUser);
-//                System.out.println(savedUser.getFavoriteFilms());
-//            } catch (Exception e) {
-//                System.out.println(e);
-//            }
-//                savedUser.addFavorite(savedFilm);
-//                System.out.println("AND WHAT");
-//                userRepository.save(savedUser);
-//                filmRepository.save(film);
+            filmRepository.getOne(film.getFilmId());
 
             for (int i = 0; i < 30; i++)
                 System.out.print(" ○ ");
