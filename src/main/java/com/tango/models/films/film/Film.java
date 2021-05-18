@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tango.models.films.comment.Comment;
-import com.tango.models.films.genre.Genre;
-import com.tango.models.films.tag.Tag;
 import com.tango.models.professional.Professional;
 import com.tango.models.user.User;
 import lombok.Data;
@@ -56,7 +54,9 @@ public class Film {
 //            inverseJoinColumns = @JoinColumn(name = "genre_id")
 //    )
 //    private Set<Genre> genres = new HashSet<>();
-
+    @JsonProperty(value = "film_link")
+    @Column(name = "film_link")
+    String filmLink;
     @JsonProperty(value = "film_id")
     @Id
     @SequenceGenerator(
@@ -70,18 +70,11 @@ public class Film {
     )
     @Column(name = "film_id")
     private long filmId;
-
     @Column(name = "title", columnDefinition = "text")
     private String title;
-
     @JsonProperty(value = "desc_rating")
     @Column(name = "desc_rating")
     private double descRating;
-
-    @JsonProperty(value = "film_link")
-    @Column(name = "film_link")
-    String filmLink;
-
     @JsonProperty(value = "desc_image")
     @Column(name = "desc_image", columnDefinition = "text")
     private String descImage;
@@ -154,7 +147,9 @@ public class Film {
 
     public void removeConnoisseurs(User connoisseur) {
         connoisseurs.remove(connoisseur);
-        connoisseur.getFavoriteFilms().remove(this);
+        if (connoisseur.isNull()) {
+            connoisseur.getFavoriteFilms().remove(this);
+        }
     }
 
     //////////////////////////////////// PROFESSIONALS

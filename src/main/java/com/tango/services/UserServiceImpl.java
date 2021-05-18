@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl {
@@ -40,6 +41,11 @@ public class UserServiceImpl {
     }
 
     public void delete(long id) {
+        User user = userRepository.getOne(id);
+        Set<Film> favoriteFilms = user.getFavoriteFilms();
+        for (var film : favoriteFilms) {
+            film.removeConnoisseurs(user);
+        }
         userRepository.deleteById(id);
     }
 

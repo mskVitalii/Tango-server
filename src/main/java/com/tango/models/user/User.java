@@ -150,6 +150,10 @@ public class User {
 //        film.getConnoisseurs().remove(this);
     }
 
+    public boolean isNull() {
+        return this.username == null || this.email == null;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
