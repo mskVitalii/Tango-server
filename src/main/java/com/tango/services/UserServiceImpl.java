@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.NoSuchElementException;
 import java.util.Set;
@@ -16,13 +17,16 @@ import java.util.Set;
 @Service
 public class UserServiceImpl {
 
-    private final PasswordEncoder passwordEncoder;
-    private final UserRepository userRepository;
+    final PasswordEncoder passwordEncoder;
+    final UserRepository userRepository;
+    final ChatUserService chatUserService;
 
     public UserServiceImpl(@Autowired PasswordEncoder passwordEncoder,
-                           @Autowired UserRepository userRepository) {
+                           @Autowired UserRepository userRepository,
+                           @Autowired ChatUserService chatUserService) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
+        this.chatUserService = chatUserService;
     }
 
     public User findById(long userId) {
@@ -43,9 +47,12 @@ public class UserServiceImpl {
     public void delete(long id) {
         User user = userRepository.getOne(id);
         Set<Film> favoriteFilms = user.getFavoriteFilms();
-        for (var film : favoriteFilms) {
-            film.removeConnoisseurs(user);
-        }
+            for (var film : favoriteFilms) {
+                film.removeConnoisseurs(user);
+            }
+        chatUserService.deleteAllMessagesByUserId(id);
+        chatUserService.deleteAllByUserId(id);
+
         userRepository.deleteById(id);
     }
 

@@ -35,6 +35,9 @@ public class Message {
     )
     private long messageId;
 
+    @Enumerated(EnumType.STRING)
+    public MessageType messageType = MessageType.CHAT;
+
     @Column(columnDefinition = "text")
     private String message;
 
@@ -65,12 +68,24 @@ public class Message {
         this.chatRoom = chatRoom;
     }
 
-
-    public Attachment createAttachment(String picture, String video, String music, String map, ChatRoom chatRoom) {
-        return new Attachment(picture, video, music, map, chatRoom, this);
+    // Для запросов
+    public Message(MessageType messageType,
+                   String message,
+                   LocalDate posted) {
+        this.messageType = messageType;
+        this.message = message;
+        this.posted = posted;
     }
 
-    //////////////////////////////////// MESSAGES
+
+    public Attachment createAttachment(String picture,
+                                       String video,
+                                       String music,
+                                       String map) {
+        return new Attachment(picture, video, music, map, this.chatRoom, this);
+    }
+
+    //////////////////////////////////// ATTACHMENTS
     public void addAttachment(Attachment attachment) {
         this.attachments.add(attachment);
         attachment.setMessage(this);
@@ -102,6 +117,7 @@ public class Message {
                 "messageId=" + messageId +
                 ", message='" + message + '\'' +
                 ", posted=" + posted +
+                ", messageType=" + messageType.name() +
                 ", attachments=" + attachments +
                 ", user=" + "\t[" + chatUser.getChatUserId() + "] " + chatUser.getUser().getUsername() +
                 ", chatRoom=" + "\t[" + chatRoom.getChatId() + "] " + chatRoom.getName() +

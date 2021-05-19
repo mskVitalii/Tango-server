@@ -226,9 +226,9 @@ public class TangoApplication {
             messageRepository.save(message2);
             messageRepository.save(message3);
 
-            message2.addAttachment(message2.createAttachment("picture", "video", "music", "map", chatRoom));
-            message2.addAttachment(message2.createAttachment("picture", "video", "music", "map", chatRoom));
-            message2.addAttachment(message2.createAttachment("picture", "video", "music", "map", chatRoom));
+            message2.addAttachment(message2.createAttachment("picture", "video", "music", "map"));
+            message2.addAttachment(message2.createAttachment("picture", "video", "music", "map"));
+            message2.addAttachment(message2.createAttachment("picture", "video", "music", "map"));
             messageRepository.save(message2);
 
             for (int i = 0; i < 30; i++)
