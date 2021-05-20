@@ -4,15 +4,19 @@ import com.tango.DTO.ChatCreationRequest;
 import com.tango.DTO.InvitationRequest;
 import com.tango.DTO.PaginationResponse;
 import com.tango.models.chat.attachment.Attachment;
+import com.tango.models.chat.message.Message;
 import com.tango.models.chat.room.ChatRoom;
 import com.tango.models.chat.user.ChatUser;
 import com.tango.services.ChatRoomService;
+import com.tango.services.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import javax.websocket.server.PathParam;
 
 /**
  * Этот класс предназначен НЕ для чата,
@@ -26,22 +30,12 @@ import org.springframework.web.bind.annotation.*;
 public class ChatsInteractionController {
 
     final ChatRoomService chatRoomService;
+    final MessageService messageService;
 
-    @Autowired
-    public ChatsInteractionController(ChatRoomService chatRoomService) {
+    public ChatsInteractionController(@Autowired ChatRoomService chatRoomService,
+                                      @Autowired MessageService messageService) {
         this.chatRoomService = chatRoomService;
-    }
-
-    @PostMapping
-    public ChatRoom createChat(@RequestBody ChatCreationRequest chatDTO) {
-        return chatRoomService.createChatRoom(chatDTO);
-    }
-
-    @PutMapping("edit/{chat_id}")
-    public ChatRoom editChat(
-            @PathVariable("chat_id") long chatId,
-            @RequestBody ChatCreationRequest chatDTO) {
-        return chatRoomService.editChatRoom(chatId, chatDTO);
+        this.messageService = messageService;
     }
 
     @GetMapping
@@ -62,12 +56,6 @@ public class ChatsInteractionController {
         return ResponseEntity.ok(new PaginationResponse<>(attachments));
     }
 
-    @PostMapping("user/invite/{chat_id}")
-    public ChatUser inviteUser(@PathVariable("chat_id") long chatId,
-                               @RequestBody InvitationRequest invitationRequest) {
-        return chatRoomService.createInvitation(chatId, invitationRequest);
-    }
-
     @GetMapping("user/invitations")
     public ResponseEntity<PaginationResponse<?>> getInvitation(
             @RequestParam("user_id") long chatId,
@@ -77,9 +65,36 @@ public class ChatsInteractionController {
         return ResponseEntity.ok(new PaginationResponse<>(users));
     }
 
+    @GetMapping("history/{chat_id}")
+    public ResponseEntity<PaginationResponse<?>> getHistory(
+            @PathVariable("chat_id") long chatId,
+            @RequestParam int page,
+            @RequestParam int size) {
+        Page<Message> messages = messageService.getMessagesFromChat(chatId, PageRequest.of(page, size));
+        return ResponseEntity.ok(new PaginationResponse<>(messages));
+    }
+
     @PutMapping("user/accept/{chat_user_id}")
     public ChatUser acceptInvitation(@PathVariable("chat_user_id") long chatUserId) {
         return chatRoomService.acceptInvitation(chatUserId);
+    }
+
+    @PutMapping("edit/{chat_id}")
+    public ChatRoom editChat(
+            @PathVariable("chat_id") long chatId,
+            @RequestBody ChatCreationRequest chatDTO) {
+        return chatRoomService.editChatRoom(chatId, chatDTO);
+    }
+
+    @PostMapping
+    public ChatRoom createChat(@RequestBody ChatCreationRequest chatDTO) {
+        return chatRoomService.createChatRoom(chatDTO);
+    }
+
+    @PostMapping("user/invite/{chat_id}")
+    public ChatUser inviteUser(@PathVariable("chat_id") long chatId,
+                               @RequestBody InvitationRequest invitationRequest) {
+        return chatRoomService.createInvitation(chatId, invitationRequest);
     }
 
     @PutMapping("user/{chat_user_id}")

@@ -4,6 +4,9 @@ import com.tango.DTO.MessageDTO;
 import com.tango.models.chat.message.Message;
 import com.tango.models.chat.message.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -26,5 +29,9 @@ public class MessageService {
         message.setChatRoom(chatRoomService.getChatByChatId(messageDTO.getChatId()));
         message.setChatUser(chatUserService.getUserByChatId(messageDTO.getChatUserId()));
         return messageRepository.save(message);
+    }
+
+    public Page<Message> getMessagesFromChat(long chatId, Pageable pageable) {
+        return messageRepository.findAllMessagesByChatId(chatId, pageable);
     }
 }
