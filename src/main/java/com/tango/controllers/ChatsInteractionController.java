@@ -2,6 +2,7 @@ package com.tango.controllers;
 
 import com.tango.DTO.ChatCreationRequest;
 import com.tango.DTO.InvitationRequest;
+import com.tango.DTO.MessageResponseDTO;
 import com.tango.DTO.PaginationResponse;
 import com.tango.models.chat.attachment.Attachment;
 import com.tango.models.chat.message.Message;
@@ -70,7 +71,7 @@ public class ChatsInteractionController {
             @PathVariable("chat_id") long chatId,
             @RequestParam int page,
             @RequestParam int size) {
-        Page<Message> messages = messageService.getMessagesFromChat(chatId, PageRequest.of(page, size));
+        Page<MessageResponseDTO> messages = messageService.getMessagesFromChat(chatId, PageRequest.of(page, size));
         return ResponseEntity.ok(new PaginationResponse<>(messages));
     }
 

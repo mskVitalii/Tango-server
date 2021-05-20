@@ -1,13 +1,16 @@
 package com.tango.services;
 
 import com.tango.DTO.MessageDTO;
+import com.tango.DTO.MessageResponseDTO;
 import com.tango.models.chat.message.Message;
 import com.tango.models.chat.message.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.time.ZoneId;
+import java.util.Date;
 
 @Service
 public class MessageService {
@@ -31,7 +34,14 @@ public class MessageService {
         return messageRepository.save(message);
     }
 
-    public Page<Message> getMessagesFromChat(long chatId, Pageable pageable) {
-        return messageRepository.findAllMessagesByChatId(chatId, pageable);
+    public Page<MessageResponseDTO> getMessagesFromChat(long chatId, Pageable pageable) {
+        Page<Message> messagesByChatId = messageRepository.findAllMessagesByChatId(chatId, pageable);
+
+        return messagesByChatId.map(message -> new MessageResponseDTO(
+                message.getChatUser().getUser().getUsername(),
+                message.getChatUser().getUser().getAvatar(),
+                Date.from(message.getPosted().atStartOfDay(ZoneId.systemDefault()).toInstant()),
+                message.getMessage(),
+                message.getMessageType()));
     }
 }
