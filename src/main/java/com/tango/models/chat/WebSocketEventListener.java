@@ -13,17 +13,19 @@ public class WebSocketEventListener {
 
     @Autowired
     private SimpMessageSendingOperations messagingTemplate;
+
     @EventListener
     public void handleWebSocketConnectListener(SessionConnectedEvent event) {
         System.out.println("Received a new web socket connection");
         System.out.println(event.getMessage());
     }
+
     @EventListener
     public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
         System.out.println(event.getMessage());
         StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
         String username = (String) headerAccessor.getSessionAttributes().get("username");
-        if(username != null) {
+        if (username != null) {
             System.out.println("User Disconnected : " + username);
             ChatMessage chatMessage = new ChatMessage();
             chatMessage.setType(ChatMessage.MessageType.LEAVE);

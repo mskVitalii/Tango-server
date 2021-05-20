@@ -192,7 +192,7 @@ button.accent {
     position: relative;
 }
 
-#chat-page .chat-message i {
+#chat-page .chat-message img {
     position: absolute;
     width: 42px;
     height: 42px;

@@ -1,5 +1,7 @@
 package com.tango.models.chat.user;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tango.models.chat.room.ChatRoom;
 import com.tango.models.roles.Role;
@@ -64,12 +66,13 @@ public class ChatUser {
     @ManyToOne(fetch = FetchType.LAZY)
     Role role;
 
+    @JsonManagedReference
     @ManyToOne(fetch = FetchType.LAZY)
     User user;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     ChatRoom chatRoom;
-
 
     //------------------------------------UTILS
     @Override

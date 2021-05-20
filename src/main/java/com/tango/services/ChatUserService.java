@@ -36,19 +36,17 @@ public class ChatUserService {
     }
 
     public ChatUser getUserByChatId(long chatUserId) {
-        return chatUserRepository.findById(chatUserId).orElseThrow(()
+        return chatUserRepository.findByIdFetch(chatUserId).orElseThrow(()
                 -> new NoSuchElementException("[ERROR] No ChatUser with id=" + chatUserId));
     }
 
     @Transactional
     public void deleteAllMessagesByUserId(long userId) {
         List<Message> chatUserMessages = messageRepository.getAllByUserId(userId);
-        //TODO: удалить из chatUserMessages пользователя
         for (var message : chatUserMessages) {
             message.setChatUser(null);
             messageRepository.save(message);
         }
-//        chatUserRepository.deleteAllByUserId(userId);
     }
 
     @Transactional

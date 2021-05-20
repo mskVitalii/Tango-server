@@ -18,6 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class ChatRoomService {
@@ -134,6 +135,11 @@ public class ChatRoomService {
         } catch (Exception e) {
             throw new TangoException(e.getMessage());
         }
+    }
+
+    public ChatRoom getChatByChatId(long chatId) {
+        return chatRoomRepository.findById(chatId).orElseThrow(()
+                -> new NoSuchElementException("[ERROR] No Chat with id=" + chatId));
     }
 }
 

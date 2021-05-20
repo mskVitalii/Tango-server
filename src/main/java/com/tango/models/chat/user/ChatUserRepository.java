@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ChatUserRepository extends JpaRepository<ChatUser, Long> {
@@ -26,6 +27,9 @@ public interface ChatUserRepository extends JpaRepository<ChatUser, Long> {
     @Modifying
     @Query("delete from ChatUser u where u.user.Id=?1")
     void deleteAllByUserId(long userId);
+
+    @Query("select u from ChatUser u join fetch u.user where u.chatUserId=?1")
+    Optional<ChatUser> findByIdFetch(long chatUserId);
 
 //    @Query("select u from ChatUser u where u.")
 //    List<Message> getAllMessagesByUserId(long userId);

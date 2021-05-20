@@ -1,21 +1,40 @@
 package com.tango.controllers;
 
+import com.tango.DTO.MessageDTO;
 import com.tango.models.chat.ChatMessage;
 import com.tango.models.chat.message.Message;
+import com.tango.models.chat.room.ChatRoom;
+import com.tango.models.chat.user.ChatUser;
+import com.tango.services.ChatUserService;
+import com.tango.services.MessageService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Controller
 public class ChatController {
 
-    @MessageMapping("/chat.sendMessage")
-    @SendTo("/topic/public")
-    public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
-        return chatMessage;
+    //    @MessageMapping("/chat.sendMessage")
+//    @SendTo("/topic/public")
+//    public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
+//        return chatMessage;
+//    }
+    final ChatUserService chatUserService;
+    final MessageService messageService;
+
+    public ChatController(@Autowired ChatUserService chatUserService,
+                          @Autowired MessageService messageService) {
+        this.chatUserService = chatUserService;
+        this.messageService = messageService;
     }
+
     @MessageMapping("/chat.addUser")
     @SendTo("/topic/public")
     public ChatMessage addUser(@Payload ChatMessage chatMessage,
@@ -25,19 +44,32 @@ public class ChatController {
         return chatMessage;
     }
 
-//    @MessageMapping("/chat.sendMessage")
-//    @SendTo("/topic/public")
-//    public Message sendMessage(@Payload Message message) {
-//        return message;
-//    }
-//
-//    @MessageMapping("/chat.addUser")
-//    @SendTo("/topic/public")
-//    public Message addUser(@Payload Message message,
-//                           SimpMessageHeaderAccessor headerAccessor) {
-//        // Add username in web socket session
-//        headerAccessor.getSessionAttributes().put("username", message.getChatUser().getUser().getUsername());
-//        return message;
-//    }
+    @MessageMapping("/chat.sendMessage")
+    @SendTo("/topic/public")
+    public ResponseEntity<?> sendMessage(@Payload MessageDTO messageDTO) {
+        System.out.println(messageDTO);
+        try {
+            Message message = messageService.toMessageWithSave(messageDTO);
+            ChatUser chatUser = message.getChatUser();
+            message.setChatUser(null);
 
+            Map<String, Object> chatUserJSON = new HashMap<>();
+            chatUserJSON.put("username", chatUser.getUser().getUsername());
+            chatUserJSON.put("avatar", chatUser.getUser().getAvatar());
+            chatUserJSON.put("user_id", chatUser.getUser().getId());
+            chatUserJSON.put("email", chatUser.getUser().getEmail());
+            chatUserJSON.put("professional", chatUser.getUser().getProfessional());
+            chatUser.setUser(null);
+            chatUser.setRole(null);
+            chatUserJSON.put("info", chatUser);
+
+            Map<String, Object> response = new HashMap<>();
+            response.put("content", message);
+            response.put("chat_user", chatUserJSON);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            System.out.println(e.getMessage() + "\n\n\n");
+            throw e;
+        }
+    }
 }

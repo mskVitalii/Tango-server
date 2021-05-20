@@ -3,7 +3,6 @@ package com.tango.services;
 import com.tango.DTO.MessageDTO;
 import com.tango.models.chat.message.Message;
 import com.tango.models.chat.message.MessageRepository;
-import com.tango.models.chat.user.ChatUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,14 +21,10 @@ public class MessageService {
         this.chatUserService = chatUserService;
     }
 
-    public Message toMessage(MessageDTO messageDTO) {
-        Message message = new Message(
-                messageDTO.getMessageType(),
-                messageDTO.getMessage(),
-                messageDTO.getPosted());
-        long chatUserId;
-        long chatId;
-        ChatUser chatUser = chatUserService.getUserByChatId(messageDTO.getChatUserId());
-    return message;
+    public Message toMessageWithSave(MessageDTO messageDTO) {
+        Message message = messageDTO.toMessage();
+        message.setChatRoom(chatRoomService.getChatByChatId(messageDTO.getChatId()));
+        message.setChatUser(chatUserService.getUserByChatId(messageDTO.getChatUserId()));
+        return messageRepository.save(message);
     }
 }

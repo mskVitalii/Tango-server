@@ -1,5 +1,7 @@
 package com.tango.models.chat.message;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tango.models.chat.attachment.Attachment;
@@ -20,6 +22,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Message {
 
     @JsonProperty(value = "message_id")
@@ -49,9 +52,11 @@ public class Message {
     @OneToMany(mappedBy = "message", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Attachment> attachments = new ArrayList<>();
 
+    @JsonManagedReference
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
     private ChatUser chatUser;
 
+    @JsonManagedReference
     @ManyToOne(fetch = FetchType.LAZY)
     private ChatRoom chatRoom;
 
@@ -119,8 +124,8 @@ public class Message {
                 ", posted=" + posted +
                 ", messageType=" + messageType.name() +
                 ", attachments=" + attachments +
-                ", user=" + "\t[" + chatUser.getChatUserId() + "] " + chatUser.getUser().getUsername() +
-                ", chatRoom=" + "\t[" + chatRoom.getChatId() + "] " + chatRoom.getName() +
+//                ", user=" + "\t[" + chatUser.getChatUserId() + "] " + chatUser.getUser().getUsername() +
+//                ", chatRoom=" + "\t[" + chatRoom.getChatId() + "] " + chatRoom.getName() +
                 '}';
     }
 }

@@ -15,6 +15,10 @@ public class MessageDTO {
     long chatUserId;
     long chatId;
     String message;
+    String messageType;
     LocalDate posted;
-    MessageType messageType;
+
+    public Message toMessage() {
+        return new Message(MessageType.fromString(messageType), message, posted);
+    }
 }

@@ -175,7 +175,7 @@ public class TangoApplication {
                     LocalDate.now().minusYears(20),
                     LocalDate.now().plusMonths(1),
                     Set.of(userRole));
-
+            user.setAvatar("https://sun1-97.userapi.com/s/v1/ig2/kYt1IqBJX4x86sXnw75NyyYwnuFog7A3vUOyam6uRzsWfDH5DiK4Zofx9AVFxZ-l--RjQXOIcVlwxM2bqyhPPH4Z.jpg?size=50x0&quality=96&crop=106,149,684,684&ava=1");
             User admin = new User(
                     "admin@gmail.com",
                     "admin",
@@ -183,7 +183,7 @@ public class TangoApplication {
                     LocalDate.now().minusYears(20),
                     LocalDate.now().plusMonths(1),
                     Set.of(adminRole));
-
+            admin.setAvatar("https://sun1-97.userapi.com/s/v1/ig2/kYt1IqBJX4x86sXnw75NyyYwnuFog7A3vUOyam6uRzsWfDH5DiK4Zofx9AVFxZ-l--RjQXOIcVlwxM2bqyhPPH4Z.jpg?size=50x0&quality=96&crop=106,149,684,684&ava=1");
             var comment1 = new Comment(film, user, faker.lorem().characters(), true);
             var comment2 = new Comment(film, admin, faker.lorem().characters(), true);
 

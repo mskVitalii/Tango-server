@@ -67,4 +67,9 @@ public class UserServiceImpl {
     public Page<User> getUsersSearchByUsername(String username, Pageable pageable) {
         return userRepository.findAllByUsernameLike("%" + username + "%", pageable);
     }
+
+    public User findUserById(long userId) {
+        return userRepository.findById(userId).orElseThrow(()
+                -> new NoSuchElementException("USER with id='" + userId + "' does not exist"));
+    }
 }
