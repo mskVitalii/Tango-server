@@ -91,7 +91,11 @@ function onMessageReceived(payload) {
         message = message.body
         const username = message.username
         const messageValue = message.message
-        const posted = new Date(message.posted).toLocaleString('ru', { day: '2-digit', month: '2-digit', year: '2-digit' });
+        const posted = new Date(message.posted).toLocaleString('ru', {
+            day: '2-digit',
+            month: '2-digit',
+            year: '2-digit'
+        });
         const avatarValue = message.avatar ?? message.username
 
         console.log(messageValue, avatarValue, username, posted)

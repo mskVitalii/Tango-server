@@ -216,12 +216,15 @@ public class TangoApplication {
             ////////////////////////////// Логика с чатом
             ChatRoom chatRoom = new ChatRoom("Новый чатик");
             chatRoomRepository.save(chatRoom);
-            ChatUser chatUser = new ChatUser(ChatUserRights.GOD, admin, chatRoom);
-            chatUserRepository.save(chatUser);
+            ChatUser Vitaly = new ChatUser(ChatUserRights.GOD, true, admin, chatRoom);
+            ChatUser Gleb = new ChatUser(ChatUserRights.GOD, true, user, chatRoom);
 
-            Message message1 = new Message("Текстовое сообщение", chatUser, chatRoom);
-            Message message2 = new Message(chatUser, chatRoom);
-            Message message3 = new Message("Сообщение с вложениями", chatUser, chatRoom);
+            chatUserRepository.save(Vitaly);
+            chatUserRepository.save(Gleb);
+
+            Message message1 = new Message("Текстовое сообщение", Vitaly, chatRoom);
+            Message message2 = new Message(Vitaly, chatRoom);
+            Message message3 = new Message("Сообщение с вложениями", Vitaly, chatRoom);
             messageRepository.save(message1);
             messageRepository.save(message2);
             messageRepository.save(message3);
