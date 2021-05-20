@@ -1,6 +1,7 @@
 package com.tango.models.chat.user;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tango.models.chat.room.ChatRoom;
@@ -18,6 +19,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class ChatUser {
 
     @JsonProperty(value = "chat_user_id")
