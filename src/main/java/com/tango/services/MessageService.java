@@ -38,6 +38,7 @@ public class MessageService {
         Page<Message> messagesByChatId = messageRepository.findAllMessagesByChatId(chatId, pageable);
 
         return messagesByChatId.map(message -> new MessageResponseDTO(
+                message.getMessageId(),
                 message.getChatUser().getUser().getUsername(),
                 message.getChatUser().getUser().getAvatar(),
                 Date.from(message.getPosted().atStartOfDay(ZoneId.systemDefault()).toInstant()),

@@ -50,6 +50,7 @@ public class ChatController {
         ChatUser chatUser = message.getChatUser();
 
         return new MessageResponseDTO(
+                message.getMessageId(),
                 chatUser.getUser().getUsername(),
                 chatUser.getUser().getAvatar(),
                 Date.from(message.getPosted().atStartOfDay(ZoneId.systemDefault()).toInstant()),
