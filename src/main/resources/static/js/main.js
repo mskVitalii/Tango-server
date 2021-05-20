@@ -57,9 +57,6 @@ function sendMessage(event) {
 
     if (messageContent && stompClient) {
         var chatMessage = {
-            // sender: username,
-            // content: messageInput.value,
-            // type: 'CHAT',
             chatUserId: 1,
             chatId: 1,
             message: messageInput.value,
@@ -91,53 +88,17 @@ function onMessageReceived(payload) {
         messageElement.classList.add('chat-message');
         var avatarElement = document.createElement('img');
 
-        // body:
-        //     chat_user:
-        //          avatar: null
-        //          email: "admin@gmail.com"
-        //          info: {rights: "GOD", joined: false, role: null, user: null, chat_user_id: 1}
-        //          professional: null
-        //          user_id: 2
-        //          username: "admin"
-        //      content:
-        //          attachments: []
-        //          chatRoom: {avatar: null, info: null, name: "Новый чатик", lastPosted: "2021-05-20", private: false, …}
-        //          message: "fv"
-        //          messageType: "CHAT"
-        //          message_id: 4
-        //          posted: "2021-05-20"
-        //---------------------------------//---------------------------------//---------------------------------
-        //          message.chat_user.avatar: null
-        //          message.chat_user.email: "admin@gmail.com"
-        //          message.chat_user.info: {rights: "GOD", joined: false, role: null, user: null, chat_user_id: 1}
-        //          message.chat_user.professional: null
-        //          message.chat_user.user_id: 2
-        //          message.chat_user.username: "admin"
-        //
-        //          message.content.attachments: []
-        //          message.content.chatRoom: {avatar: null, info: null, name: "Новый чатик", lastPosted: "2021-05-20", private: false, …}
-        //          message.content.message: "fv"
-        //          message.content.messageType: "CHAT"
-        //          message.content.message_id: 4
-        //          message.content.posted: "2021-05-20"
-
         message = message.body
-        const userId = message.chat_user.user_id
-        const messageId = message.content.message_id;
-        const messageValue = message.content.message
-        const avatarValue = message.chat_user.avatar ?? message.chat_user.info.chat_user_id
-        const username = message.chat_user.username
-        const posted = new Date(message.content.posted).toLocaleString('ru', {
-            day: '2-digit',
-            month: '2-digit',
-            year: '2-digit'
-        });
+        const username = message.username
+        const messageValue = message.message
+        const posted = new Date(message.posted).toLocaleString('ru', { day: '2-digit', month: '2-digit', year: '2-digit' });
+        const avatarValue = message.avatar ?? message.username
+
         console.log(messageValue, avatarValue, username, posted)
 
         var avatarText = document.createTextNode(username[0]);
         avatarElement.appendChild(avatarText);
-        avatarElement.id = message.content.message_id;
-        avatarElement.style['background-color'] = getAvatarColor(userId);
+        avatarElement.style['background-color'] = getAvatarColor(username);
         avatarElement.style['background-position'] = "top";
         avatarElement.src = avatarValue;
         messageElement.appendChild(avatarElement);
@@ -148,7 +109,7 @@ function onMessageReceived(payload) {
         messageElement.appendChild(usernameElement);
     }
     var textElement = document.createElement('p');
-    var messageText = document.createTextNode(message.content.message ?? message.content);
+    var messageText = document.createTextNode(message.message ?? message.content);
     textElement.appendChild(messageText);
 
     messageElement.appendChild(textElement);

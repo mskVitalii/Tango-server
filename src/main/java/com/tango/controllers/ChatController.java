@@ -53,19 +53,24 @@ public class ChatController {
             ChatUser chatUser = message.getChatUser();
             message.setChatUser(null);
 
-            Map<String, Object> chatUserJSON = new HashMap<>();
-            chatUserJSON.put("username", chatUser.getUser().getUsername());
-            chatUserJSON.put("avatar", chatUser.getUser().getAvatar());
-            chatUserJSON.put("user_id", chatUser.getUser().getId());
-            chatUserJSON.put("email", chatUser.getUser().getEmail());
-            chatUserJSON.put("professional", chatUser.getUser().getProfessional());
-            chatUser.setUser(null);
-            chatUser.setRole(null);
-            chatUserJSON.put("info", chatUser);
+//            Map<String, Object> chatUserJSON = new HashMap<>();
+//            chatUserJSON.put("username", chatUser.getUser().getUsername());
+//            chatUserJSON.put("avatar", chatUser.getUser().getAvatar());
+//            chatUserJSON.put("user_id", chatUser.getUser().getId());
+//            chatUserJSON.put("email", chatUser.getUser().getEmail());
+//            chatUserJSON.put("professional", chatUser.getUser().getProfessional());
+//            chatUser.setUser(null);
+//            chatUser.setRole(null);
+//            chatUserJSON.put("info", chatUser);
 
             Map<String, Object> response = new HashMap<>();
-            response.put("content", message);
-            response.put("chat_user", chatUserJSON);
+            response.put("username", chatUser.getUser().getUsername());
+            response.put("avatar", chatUser.getUser().getAvatar());
+            response.put("posted", message.getPosted());
+            response.put("message", message.getMessage());
+            response.put("messageType", message.getMessageType());
+//            response.put("content", message);
+//            response.put("chat_user", chatUserJSON);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             System.out.println(e.getMessage() + "\n\n\n");
