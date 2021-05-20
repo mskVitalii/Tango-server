@@ -88,7 +88,6 @@ function onMessageReceived(payload) {
         messageElement.classList.add('chat-message');
         var avatarElement = document.createElement('img');
 
-        message = message.body
         const username = message.username
         const messageValue = message.message
         const posted = new Date(message.posted).toLocaleString('ru', {
