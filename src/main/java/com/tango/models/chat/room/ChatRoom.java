@@ -1,5 +1,6 @@
 package com.tango.models.chat.room;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tango.models.chat.attachment.Attachment;
 import com.tango.models.chat.message.Message;
@@ -20,6 +21,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class ChatRoom {
 
     @JsonProperty(value = "chat_id")
