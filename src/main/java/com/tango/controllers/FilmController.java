@@ -1,6 +1,7 @@
 package com.tango.controllers;
 
 import com.tango.DTO.FilmDTO;
+import com.tango.DTO.FilmRequest;
 import com.tango.DTO.PaginationResponse;
 import com.tango.models.films.film.Film;
 import com.tango.services.FilmService;
@@ -61,9 +62,12 @@ public class FilmController {
         return ResponseEntity.ok(new PaginationResponse<>(films));
     }
 
+    @PostMapping
+    public FilmDTO addFilm(@RequestBody FilmRequest film) {
+        return filmService.addFilm(film.toFilmWithoutGenre(), film.getGenres());
+    }
 
     ////////////////////////////////////////////// FAVORITE
-
     @PostMapping("{film_id}/favorite/{user_id}")
     public ResponseEntity<?> addFilmToFavorite(
             @PathVariable("film_id") long filmId,

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class GenreService {
@@ -22,6 +23,11 @@ public class GenreService {
                         @Autowired FilmGenreRepository filmGenreRepository) {
         this.genreRepository = genreRepository;
         this.filmGenreRepository = filmGenreRepository;
+    }
+
+    public Genre getGenreById(long genreId) {
+        return genreRepository.findById(genreId).orElseThrow(()
+                -> new NoSuchElementException("[ERROR] No genre with id=" + genreId));
     }
 
     public List<Genre> getGenresByFilm(Film film) {
