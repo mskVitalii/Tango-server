@@ -30,7 +30,7 @@ public class MessageService {
     public Message toMessageWithSave(MessageDTO messageDTO) {
         Message message = messageDTO.toMessage();
         message.setChatRoom(chatRoomService.getChatByChatId(messageDTO.getChatId()));
-        message.setChatUser(chatUserService.getUserByChatId(messageDTO.getChatUserId()));
+        message.setChatUser(chatUserService.getChatUserByChatUserId(messageDTO.getChatUserId()));
         return messageRepository.save(message);
     }
 

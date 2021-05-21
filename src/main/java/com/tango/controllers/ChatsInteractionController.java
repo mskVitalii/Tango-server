@@ -5,10 +5,10 @@ import com.tango.DTO.InvitationRequest;
 import com.tango.DTO.MessageResponseDTO;
 import com.tango.DTO.PaginationResponse;
 import com.tango.models.chat.attachment.Attachment;
-import com.tango.models.chat.message.Message;
 import com.tango.models.chat.room.ChatRoom;
 import com.tango.models.chat.user.ChatUser;
 import com.tango.services.ChatRoomService;
+import com.tango.services.ChatUserService;
 import com.tango.services.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,8 +16,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import javax.websocket.server.PathParam;
 
 /**
  * Этот класс предназначен НЕ для чата,
@@ -31,11 +29,14 @@ import javax.websocket.server.PathParam;
 public class ChatsInteractionController {
 
     final ChatRoomService chatRoomService;
+    final ChatUserService chatUserService;
     final MessageService messageService;
 
     public ChatsInteractionController(@Autowired ChatRoomService chatRoomService,
+                                      @Autowired ChatUserService chatUserService,
                                       @Autowired MessageService messageService) {
         this.chatRoomService = chatRoomService;
+        this.chatUserService = chatUserService;
         this.messageService = messageService;
     }
 
@@ -73,6 +74,12 @@ public class ChatsInteractionController {
             @RequestParam int size) {
         Page<MessageResponseDTO> messages = messageService.getMessagesFromChat(chatId, PageRequest.of(page, size));
         return ResponseEntity.ok(new PaginationResponse<>(messages));
+    }
+
+    @GetMapping("user/{user_id}/from/{chat_id}")
+    public ChatUser getChatUserData(@PathVariable("user_id") long userId,
+                                    @PathVariable("chat_id") long chatId) {
+        return chatUserService.getChatUserByUserIdAndChatId(userId, chatId);
     }
 
     @PutMapping("user/accept/{chat_user_id}")

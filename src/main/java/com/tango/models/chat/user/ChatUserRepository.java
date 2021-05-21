@@ -31,6 +31,9 @@ public interface ChatUserRepository extends JpaRepository<ChatUser, Long> {
     @Query("select u from ChatUser u join fetch u.user where u.chatUserId=?1")
     Optional<ChatUser> findByIdFetch(long chatUserId);
 
+    @Query("select u from ChatUser u where u.user.Id=?1 and u.chatRoom.chatId=?2")
+    Optional<ChatUser> findByUserIdAndChatId(long userId, long chatId);
+
 //    @Query("select u from ChatUser u where u.")
 //    List<Message> getAllMessagesByUserId(long userId);
 }

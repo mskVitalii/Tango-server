@@ -35,7 +35,12 @@ public class ChatUserService {
         this.pictureUtils = pictureUtils;
     }
 
-    public ChatUser getUserByChatId(long chatUserId) {
+    public ChatUser getChatUserByUserIdAndChatId(long userId, long chatId) {
+        return chatUserRepository.findByUserIdAndChatId(userId, chatId).orElseThrow(()
+                -> new NoSuchElementException("[ERROR] No ChatUser with user_id=" + userId + " and chat_id=" + chatId));
+    }
+
+    public ChatUser getChatUserByChatUserId(long chatUserId) {
         return chatUserRepository.findByIdFetch(chatUserId).orElseThrow(()
                 -> new NoSuchElementException("[ERROR] No ChatUser with id=" + chatUserId));
     }
