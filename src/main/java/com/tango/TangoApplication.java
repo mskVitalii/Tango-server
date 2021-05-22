@@ -110,6 +110,7 @@ public class TangoApplication {
             filmGenreRepository.save(new FilmGenre(film1, SCI_FI));
             filmGenreRepository.save(new FilmGenre(film1, Comedy));
             filmGenreRepository.save(new FilmGenre(film1, Drama));
+            filmGenreRepository.save(new FilmGenre(film1, Detective));
 
             filmRepository.save(film1);
 
@@ -125,9 +126,10 @@ public class TangoApplication {
                             "Но постепенно милый Догвилль превращается для девушки в тюрьму.",
                     "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8"));
 
-            filmGenreRepository.save(new FilmGenre(film3, SCI_FI));
+            filmGenreRepository.save(new FilmGenre(film3, Detective));
+            filmRepository.save(film3);
 
-            filmRepository.save(new Film(
+            Film film4 = filmRepository.save(new Film(
                     "Мандерлей",
                     7.1,
                     "https://avatars.mds.yandex.net/get-kinopoisk-image/1773646/639d1108-7006-4a61-8307-bc56f9537418/800x800",
@@ -136,21 +138,38 @@ public class TangoApplication {
                             "где рабочие не знают, что рабство было отменено 70 лет назад...",
                     "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8"));
 
-            filmRepository.save(new Film(
+            filmGenreRepository.save(new FilmGenre(film4, Drama));
+            filmGenreRepository.save(new FilmGenre(film4, Detective));
+            filmRepository.save(film4);
+
+            Film film5 = filmRepository.save(new Film(
                     "Рассекая волны",
                     7.9,
                     "https://avatars.mds.yandex.net/get-kinopoisk-image/1600647/9d776b40-6bbb-481d-91c3-a03942f6b042/960x960",
                     "https://avatars.mds.yandex.net/get-kinopoisk-image/1600647/9d776b40-6bbb-481d-91c3-a03942f6b042/960x960",
-                    "Бог дает каждому что-то, чтобы он стал лучше. Молодая девушка Бесс из отдаленной общины на северо-западе Шотландии влюбилась в хорошего парня - Яна, работающего на буровой установке в море. Несмотря на противостояние родственников, они женятся. Бесс просит Бога, чтобы Ян всегда был рядом с ней, и Ян возвращается к ней искалеченным после несчастного случая на буровой. Что может сделать молодая женщина, чтобы ее любимый остался жив? На какую жертву может пойти?",
+                    "Бог дает каждому что-то, чтобы он стал лучше. " +
+                            "Молодая девушка Бесс из отдаленной общины на северо-западе Шотландии влюбилась в хорошего парня " +
+                            "- Яна, работающего на буровой установке в море. Несмотря на противостояние родственников, они женятся. " +
+                            "Бесс просит Бога, чтобы Ян всегда был рядом с ней, и Ян возвращается к ней искалеченным после несчастного случая на буровой." +
+                            " Что может сделать молодая женщина, чтобы ее любимый остался жив? На какую жертву может пойти?",
                     "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8"));
 
-            filmRepository.save(new Film(
+            filmGenreRepository.save(new FilmGenre(film5, Drama));
+            filmRepository.save(film5);
+
+
+            Film film6 = filmRepository.save(new Film(
                     "Реконструкция",
                     7.5,
                     "https://avatars.mds.yandex.net/get-kinopoisk-image/1900788/0abaa12f-01ff-46db-9653-efd31961fd33/960x960",
                     "https://avatars.mds.yandex.net/get-kinopoisk-image/1900788/0abaa12f-01ff-46db-9653-efd31961fd33/960x960",
                     "Двое — мужчина и женщина — встречаются в Копенгагене, проводят вместе восхитительную ночь и затем отчаянно пытаются освободиться от рутины будней и рискуют всем ради возможности быть вместе...",
                     "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8"));
+
+            filmGenreRepository.save(new FilmGenre(film6, SCI_FI));
+            filmGenreRepository.save(new FilmGenre(film6, Detective));
+            filmRepository.save(film6);
+
 
 
             var film = new Film(
@@ -167,6 +186,9 @@ public class TangoApplication {
                             "Постепенно, по мере приближения планеты, Жюстин и Клэр меняются ролями. " +
                             "Теперь паникующая Клэр нуждается в заботе. В отчаянии она с сестрой и сыном готовится принять неизбежное.",
                     "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8");
+
+
+
 
             User user = new User(
                     "Gleb@gmail.com",
@@ -199,6 +221,9 @@ public class TangoApplication {
             commentRepository.save(comment1);
             commentRepository.save(comment2);
             Film film2 = filmRepository.save(film);
+            filmGenreRepository.save(new FilmGenre(film2, SCI_FI));
+            filmRepository.save(film2);
+
             User user1 = userRepository.save(user);
             user1.addFavorite(film2);
             userRepository.save(user1);
