@@ -14,7 +14,11 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.Date;
 
 @Controller
@@ -53,7 +57,7 @@ public class ChatController {
                 message.getMessageId(),
                 chatUser.getUser().getUsername(),
                 chatUser.getUser().getAvatar(),
-                Date.from(message.getPosted().atStartOfDay(ZoneId.systemDefault()).toInstant()),
+                message.getPosted(),
                 message.getMessage(),
                 message.getMessageType());
     }

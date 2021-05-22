@@ -41,7 +41,7 @@ public class MessageService {
                 message.getMessageId(),
                 message.getChatUser().getUser().getUsername(),
                 message.getChatUser().getUser().getAvatar(),
-                Date.from(message.getPosted().atStartOfDay(ZoneId.systemDefault()).toInstant()),
+                message.getPosted(),
                 message.getMessage(),
                 message.getMessageType()));
     }

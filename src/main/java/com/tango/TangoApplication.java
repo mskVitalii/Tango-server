@@ -105,7 +105,7 @@ public class TangoApplication {
                             "Несколько ее жителей решают уйти, похитив деньги, вырученные всеми участниками коммуны перед ее закрытием. " +
                             "Однако их планы нарушают слухи о появлении красноречивого и харизматичного Иримиаша, " +
                             "пропавшего полтора года назад и считавшегося погибшим.",
-                    "https://vimeo.com/547868060"));
+                    "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8"));
 
             filmGenreRepository.save(new FilmGenre(film1, SCI_FI));
             filmGenreRepository.save(new FilmGenre(film1, Comedy));
@@ -123,7 +123,7 @@ public class TangoApplication {
                             "Местные жители – один прекраснее другого – готовы ее укрыть. " +
                             "А взамен им совсем ничего не надо, ну, разве что помочь по дому или присмотреть за детьми. " +
                             "Но постепенно милый Догвилль превращается для девушки в тюрьму.",
-                    "https://vimeo.com/547868060"));
+                    "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8"));
 
             filmGenreRepository.save(new FilmGenre(film3, SCI_FI));
 
@@ -134,7 +134,7 @@ public class TangoApplication {
                     "https://avatars.mds.yandex.net/get-kinopoisk-image/1773646/639d1108-7006-4a61-8307-bc56f9537418/800x800",
                     "Через два месяца после описанных в «Догвилле» событий Грейс оказывается на плантации в Алабаме, " +
                             "где рабочие не знают, что рабство было отменено 70 лет назад...",
-                    "https://vimeo.com/547868060"));
+                    "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8"));
 
             filmRepository.save(new Film(
                     "Рассекая волны",
@@ -142,7 +142,7 @@ public class TangoApplication {
                     "https://avatars.mds.yandex.net/get-kinopoisk-image/1600647/9d776b40-6bbb-481d-91c3-a03942f6b042/960x960",
                     "https://avatars.mds.yandex.net/get-kinopoisk-image/1600647/9d776b40-6bbb-481d-91c3-a03942f6b042/960x960",
                     "Бог дает каждому что-то, чтобы он стал лучше. Молодая девушка Бесс из отдаленной общины на северо-западе Шотландии влюбилась в хорошего парня - Яна, работающего на буровой установке в море. Несмотря на противостояние родственников, они женятся. Бесс просит Бога, чтобы Ян всегда был рядом с ней, и Ян возвращается к ней искалеченным после несчастного случая на буровой. Что может сделать молодая женщина, чтобы ее любимый остался жив? На какую жертву может пойти?",
-                    "https://vimeo.com/547868060"));
+                    "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8"));
 
             filmRepository.save(new Film(
                     "Реконструкция",
@@ -150,7 +150,7 @@ public class TangoApplication {
                     "https://avatars.mds.yandex.net/get-kinopoisk-image/1900788/0abaa12f-01ff-46db-9653-efd31961fd33/960x960",
                     "https://avatars.mds.yandex.net/get-kinopoisk-image/1900788/0abaa12f-01ff-46db-9653-efd31961fd33/960x960",
                     "Двое — мужчина и женщина — встречаются в Копенгагене, проводят вместе восхитительную ночь и затем отчаянно пытаются освободиться от рутины будней и рискуют всем ради возможности быть вместе...",
-                    "https://vimeo.com/547868060"));
+                    "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8"));
 
 
             var film = new Film(
@@ -166,7 +166,7 @@ public class TangoApplication {
                             "и одновременно страшится сообщений о приближении таинственной планеты Меланхолия. " +
                             "Постепенно, по мере приближения планеты, Жюстин и Клэр меняются ролями. " +
                             "Теперь паникующая Клэр нуждается в заботе. В отчаянии она с сестрой и сыном готовится принять неизбежное.",
-                    "https://vimeo.com/547868060");
+                    "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8");
 
             User user = new User(
                     "Gleb@gmail.com",

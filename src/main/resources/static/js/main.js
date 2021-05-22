@@ -86,7 +86,7 @@ function onMessageReceived(payload) {
         messageElement.classList.add('event-message');
         message.content = message.sender + ' left!';
     } else {
-        makeMessage();
+        message = makeMessage(messageElement, message);
     }
     var textElement = document.createElement('p');
     var messageText = document.createTextNode(message.message ?? message.content);
@@ -98,19 +98,13 @@ function onMessageReceived(payload) {
     messageArea.scrollTop = messageArea.scrollHeight;
 }
 
-function makeMessage() {
+function makeMessage(messageElement, message) {
     messageElement.classList.add('chat-message');
     var avatarElement = document.createElement('img');
 
     const username = message.username
     const messageValue = message.message
     const posted = message.posted
-    // new Date(message.posted)
-    //     .toLocaleString('ru', {
-    //     day: '2-digit',
-    //     month: '2-digit',
-    //     year: '2-digit'
-    // });
     const avatarValue = message.avatar ?? message.username
 
     console.log(messageValue, avatarValue, username, posted)
@@ -127,6 +121,7 @@ function makeMessage() {
     usernameElement.appendChild(usernameText);
     messageElement.appendChild(usernameElement);
 
+    return message
 }
 
 function getAvatarColor(messageSender) {
@@ -140,19 +135,32 @@ function getAvatarColor(messageSender) {
 }
 
 async function getHistory() {
-    var myHeaders = new Headers();
-    myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJWaXRhbHkiLCJpYXQiOjE2MjE1MTM1NDAsImV4cCI6MTYyMTU5OTk0MH0.fN0QUErDu1e3wgJIz_XY2JlgXNhtHxIsgs3G0z9A2kl9lkTM4ycBpOz6XBDCuSxPHbGLQ2Gd9QGvbYxxP0E-XQ");
+    let myHeaders = new Headers();
+    myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJWaXRhbHkiLCJpYXQiOjE2MjE2NDI0NjcsImV4cCI6MTYyMTcyODg2N30.45gWgwKkE8IEYLWFItYA1Uavp5DHZU_MsCU7GYTF2Jjx2-bGiuvVqE8Qe8CGmbZvifbwiP8lt27u7zctBXPelw");
 
-    var requestOptions = {
+    let result = await fetch("/api/chats/history/1?page=0&size=250", {
         method: 'GET',
         headers: myHeaders,
         redirect: 'follow'
-    };
-
-    await fetch("localhost:8080/api/chats/history/1?page=0&size=250", requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
+    })
+        .then(response => response.json())
         .catch(error => console.log('error', error));
+
+    console.log(result.result)
+
+    for (let i = 0; i < result.result?.length ; i++) {
+        let textElement = document.createElement('p');
+        let messageElement = document.createElement('li');
+
+        let message = makeMessage(messageElement, result.result[i])
+
+        console.log(message)
+        let messageText = document.createTextNode(message.message ?? message.content);
+        textElement.appendChild(messageText);
+        messageElement.appendChild(textElement);
+        messageArea.appendChild(messageElement);
+    }
+    messageArea.scrollTop = messageArea.scrollHeight;
 }
 
 usernameForm.addEventListener('submit', connect, true)

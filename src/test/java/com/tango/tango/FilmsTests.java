@@ -28,7 +28,7 @@ public class FilmsTests {
                 faker.random().nextDouble(),
                 "", "",
                 faker.lorem().characters(200),
-                "https://vimeo.com/547868060");
+                "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8");
 
         filmRepository.save(film);
         Assertions.assertEquals(filmRepository.count(), count + 1);

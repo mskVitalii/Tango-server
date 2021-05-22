@@ -1,6 +1,5 @@
 package com.tango.models.chat.message;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -12,8 +11,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -45,7 +44,7 @@ public class Message {
     private String message;
 
     @Column(nullable = false)
-    private LocalDate posted = LocalDate.now();
+    private Date posted = new Date();
 
     //------------------------------------FOREIGN ENTITIES
     @JsonManagedReference
@@ -76,7 +75,7 @@ public class Message {
     // Для запросов
     public Message(MessageType messageType,
                    String message,
-                   LocalDate posted) {
+                   Date posted) {
         this.messageType = messageType;
         this.message = message;
         this.posted = posted;

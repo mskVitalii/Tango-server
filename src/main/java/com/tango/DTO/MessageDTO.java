@@ -7,7 +7,8 @@ import com.tango.models.chat.message.Message;
 import com.tango.models.chat.message.MessageType;
 import lombok.Data;
 
-import java.time.LocalDate;
+//import java.time.LocalDate;
+import java.util.Date;
 
 @Data
 public class MessageDTO {
@@ -16,7 +17,7 @@ public class MessageDTO {
     long chatId;
     String message;
     String messageType;
-    LocalDate posted;
+    Date posted;
 
     public Message toMessage() {
         return new Message(MessageType.fromString(messageType), message, posted);
