@@ -175,7 +175,7 @@ public class TangoApplication {
                     LocalDate.now().minusYears(20),
                     LocalDate.now().plusMonths(1),
                     Set.of(userRole, adminRole));
-            user.setAvatar("https://sun1-85.userapi.com/s/v1/if1/I2J7E83U-E9NcluQah4KoHIi1YDzx2KckJ0UtSA-SQSU3vfQZIrKFqCoObTik0MP2AL7f3M6.jpg?size=50x0&quality=96&crop=172,1,1360,1360&ava=1");
+            user.setAvatar("https://sun9-13.userapi.com/impf/c851420/v851420370/17fde8/h8rAbGB6ARU.jpg?size=1280x851&quality=96&sign=d679fde48469fd7b3223f322b6a95190&type=album");
             User admin = new User(
                     "Vitaly@gmail.com",
                     "Vitaly",
@@ -183,7 +183,7 @@ public class TangoApplication {
                     LocalDate.now().minusYears(20),
                     LocalDate.now().plusMonths(1),
                     Set.of(adminRole));
-            admin.setAvatar("https://sun1-97.userapi.com/s/v1/ig2/kYt1IqBJX4x86sXnw75NyyYwnuFog7A3vUOyam6uRzsWfDH5DiK4Zofx9AVFxZ-l--RjQXOIcVlwxM2bqyhPPH4Z.jpg?size=50x0&quality=96&crop=106,149,684,684&ava=1");
+            admin.setAvatar("https://sun9-72.userapi.com/impg/iIilCYpm_t5LShkqB4be6oJYIW_vfxzQu8m37Q/xSVgMhi9ccE.jpg?size=810x1080&quality=96&sign=2124c94bab72cf2719b8fdf3ec1edd3c&type=album");
             var comment1 = new Comment(film, user, faker.lorem().characters(), true);
             var comment2 = new Comment(film, admin, faker.lorem().characters(), true);
 
