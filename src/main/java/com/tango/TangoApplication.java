@@ -222,9 +222,9 @@ public class TangoApplication {
             chatUserRepository.save(Vitaly);
             chatUserRepository.save(Gleb);
 
-            Message message1 = new Message("Текстовое сообщение", Vitaly, chatRoom);
-            Message message2 = new Message(Vitaly, chatRoom);
-            Message message3 = new Message("Сообщение с вложениями", Vitaly, chatRoom);
+            Message message1 = new Message("------------------------------", Vitaly, chatRoom);
+            Message message2 = new Message("\tСервер запустился",Vitaly, chatRoom);
+            Message message3 = new Message("------------------------------", Vitaly, chatRoom);
             messageRepository.save(message1);
             messageRepository.save(message2);
             messageRepository.save(message3);

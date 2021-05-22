@@ -10,7 +10,7 @@ var connectingElement = document.querySelector('.connecting');
 
 var stompClient = null;
 var username = null;
-
+var client = 1;
 var colors = [
     '#2196F3', '#32c787', '#00BCD4', '#ff5652',
     '#ffc107', '#ff85af', '#FF9800', '#39bbb0'
@@ -18,7 +18,7 @@ var colors = [
 
 function connect(event) {
     username = document.querySelector('#name').value.trim();
-
+    client = username;
     if (username) {
         usernamePage.classList.add('hidden');
         chatPage.classList.remove('hidden');
@@ -58,7 +58,7 @@ function sendMessage(event) {
 
     if (messageContent && stompClient) {
         var chatMessage = {
-            chatUserId: 1,
+            chatUserId: client,//1,
             chatId: 1,
             message: messageInput.value,
             messageType: 'CHAT',
@@ -113,6 +113,7 @@ function makeMessage(messageElement, message) {
     avatarElement.appendChild(avatarText);
     avatarElement.style['background-color'] = getAvatarColor(username);
     avatarElement.style['background-position'] = "top";
+    avatarElement.style['object-fit'] = 'cover';
     avatarElement.src = avatarValue;
     messageElement.appendChild(avatarElement);
 
